@@ -73,7 +73,7 @@ def integrate(problem, solution, t_step=None, t0=0, n_points=500):
             "v": v_timeline,
             "u": u_timeline
         })
-    df.set_index("t", inplace=True)
+    df = df.set_index("t")
     return df
 
 
@@ -146,7 +146,7 @@ def discretize(problem, solution, t_array, t0=None, align_u=False):
     if align_u:
         df["u"] = df["u"].shift(1)
         df["u"].iloc[0] = 0
-    df.set_index("t", inplace=True)
+    df = df.set_index("t")
     return df
 
 

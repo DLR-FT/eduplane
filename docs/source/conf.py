@@ -15,7 +15,24 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../..'))
+CONF_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(CONF_DIR, '..', '..'))
+sys.path.insert(0, REPO_ROOT)
+
+# Generate the API stub pages (gitignored, normally produced by the `apidoc`
+# target of docs/Makefile) at build time. This makes a plain `sphinx-build`
+# work also from an exported source tree where the generated .rst files are
+# absent and the toctree entry 'modules' would otherwise be unresolvable.
+from sphinx.ext import apidoc  # noqa: E402
+
+apidoc.main(
+    [
+        '-f',
+        '-e',
+        '-o',
+        CONF_DIR,
+        os.path.join(REPO_ROOT, 'eduplane'),
+    ])
 
 # -- Project information -----------------------------------------------------
 
@@ -77,5 +94,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 
 html_theme = 'furo'
-html_static_path = ['_static']
+# NOTE: _static/ is an empty placeholder directory that is not tracked by git
+# (git does not track empty directories). Point html_static_path at it only if
+# it exists to avoid the "html_static_path entry '_static' does not exist"
+# warning in exported source trees.
+html_static_path = ['_static'] if os.path.isdir(
+    os.path.join(CONF_DIR, '_static')) else []
 html_title = 'EDuPlane documentation'

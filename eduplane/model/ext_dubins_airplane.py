@@ -900,9 +900,17 @@ class ExtDubinsAirplane(FPMParameters):
                 while not utils.converged(V_A_min_from_T_min, abs_tol=1e-3):
                     gamma_A_value = gamma_A_func(V_A_min_from_T_min[-1])
                     n_value = n_func(V_A_min_from_T_min[-1])
-                    V_A_from_T_min = fpm.V_A_from_T_gamma_A(
-                        T_min, n_value, gamma_A_value, V_A_dot, self.C_D0,
-                        self.C_L0, self.m, self.g, self.k, self.S, self.rho)
+                    # The minimum-thrust boundary may be infeasible for the
+                    # given gamma_A/w_A_g, in which case the radicand of the
+                    # airspeed solution becomes negative and a NaN is returned.
+                    # This is an expected outcome that is handled below (the
+                    # NaN triggers the uniqueness check in converged() and the
+                    # ValueError fallback), so suppress the spurious NumPy
+                    # "invalid value encountered in sqrt" warning.
+                    with numpy.errstate(invalid="ignore"):
+                        V_A_from_T_min = fpm.V_A_from_T_gamma_A(
+                            T_min, n_value, gamma_A_value, V_A_dot, self.C_D0,
+                            self.C_L0, self.m, self.g, self.k, self.S, self.rho)
                     V_A_min_from_T_min.append(V_A_from_T_min)
                     # print(
                     #     f"airspeed_min: V_A_min[-1]={V_A_min[-1]}, n[-1]={n[-1]}, gamma_A_value={gamma_A_value}"

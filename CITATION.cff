@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 DLR e.V. (German Aerospace Center)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+cff-version: 1.2.0
+message: "If you use this software in an academic context, please cite the original paper as shown below."
+authors:
+  - family-names: "Schopferer"
+    given-names: "Simon"
+    orcid: "https://orcid.org/https://orcid.org/0000-0001-5254-3961"
+title: "EDuPlane"
+version: "1.0.0"
+date-released: 2026-11-06
+url: "https://github.com/DLR-FT/eduplane"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Schopferer"
+      given-names: "Simon"
+  title: "Extensions to the Dubins Airplane Method - Flight Performance Constraints in Uniform Wind"
+  year: 2026
+  journal: "arXiv"
+  doi: "10.48550/arXiv.2611.08004"
+  url: "https://arxiv.org/abs/2611.08004"

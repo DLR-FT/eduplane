@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 DLR e.V. (German Aerospace Center)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[flake8]
+# yapf wraps code at 80 columns (see .style.yapf). Line length is therefore
+# not enforced by flake8: yapf cannot split long comments, docstrings or
+# f-strings, so E501 would flag lines that no tool can fix.
+max-line-length = 120
+extend-ignore =
+    # Line length - see note above.
+    E501,
+    # Whitespace before ':' - conflicts with yapf's slice formatting.
+    E203,
+    # Line break before/after binary operator - yapf places operators at the
+    # start of the continuation line, which is the opposite of W503/W504.
+    W503,
+    W504,
+    # Missing whitespace around operator - yapf is configured with
+    # "no_spaces_around_selected_binary_operators: *,/" (see .style.yapf).
+    E225,
+    # Continuation line indentation - yapf's hanging-indent style.
+    E125,
+    E122,
+    # Spaces around keyword equals - yapf's "split_before_first_argument".
+    E251,
+    # Ambiguous variable name 'l' - 'l' is the conventional symbol for path
+    # length in this codebase's domain.
+    E741,
+    # Lambda assigned to a name - these lambdas are used as first-class values
+    # (passed as callbacks), where a nested 'def' would be more awkward.
+    E731,
+
+per-file-ignores =
+    # Test modules deliberately use star imports to pull in the full public API of
+    # the module under test (F403/F405), and unused locals are often intentional:
+    # objects constructed for their side effects, or values unpacked for
+    # readability (F841).
+    tests/*:F401,F403,F405,F841
+    tests/**/*:F401,F403,F405,F841
+    # __init__.py modules are re-export facades: they import names purely to
+    # expose them as part of the package's public API.
+    eduplane/__init__.py:F401
+    eduplane/**/__init__.py:F401

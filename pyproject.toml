@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2026 DLR e.V. (German Aerospace Center)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "EDuPlane"
+version = "1.0.0"
+description = "Extended Dubins Airplane Method for Trajectory Generation under Consideration of Flight Performance Constraint and Uniform Wind"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSES/Apache-2.0.txt"]
+authors = [{ name = "Simon Schopferer" }]
+keywords = [
+    "path planning",
+    "trajectory planning",
+    "trajectory generation",
+    "uas",
+    "uav",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "sympy",
+    "unyt",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+    "ipykernel",
+    "pytest",
+    "pytest-cov",
+    "build",
+    "tqdm",
+    "sphinx>=7",
+    "myst-parser>=2",
+    "furo>=2023",
+    "flake8",
+    "isort",
+    "yapf",
+    "reuse",
+]
+
+[project.urls]
+Homepage = "https://github.com/simfinite/eduplane"
+Repository = "https://github.com/simfinite/eduplane"
+Issues = "https://github.com/simfinite/eduplane/issues"
+
+[tool.setuptools.packages.find]
+include = ["eduplane*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.isort]
+line_length = 80
+# Match yapf's import formatting (see .style.yapf) so that the two tools do not
+# fight over multi-line "from x import (...)" statements.
+multi_line_output = 4
+include_trailing_comma = false
+use_parentheses = true

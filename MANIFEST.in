@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 DLR e.V. (German Aerospace Center)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# MANIFEST.in controls the *source distribution* (sdist) only.
+# The wheel is governed by [tool.setuptools.packages.find] in pyproject.toml,
+# so tests are shipped in the sdist but never installed into site-packages.
+
+include LICENSE
+include NOTICE
+include NOTICE_DEPENDENCIES.txt
+include README.md
+include pyproject.toml
+
+# Test suite (package-relative imports require the tests package to be intact)
+graft tests
+
+# Analysis notebooks and figures referenced from the README
+graft analysis
+
+# Never ship local scratch, backups or profiling output
+prune backup
+prune temp
+prune docs/build
+prune .vscode
+prune .VSCodeCounter
+prune tests/.pytest_cache
+prune analysis/.ipynb_checkpoints
+prune .pytest_cache
+global-exclude *.py[cod]
+global-exclude __pycache__
+global-exclude *.bak
+global-exclude *.pstats
+global-exclude *.stats
+global-exclude log.txt
+global-exclude temp*.txt
+global-exclude .directory
+global-exclude .DS_Store

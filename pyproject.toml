@@ -55,9 +55,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/simfinite/eduplane"
-Repository = "https://github.com/simfinite/eduplane"
-Issues = "https://github.com/simfinite/eduplane/issues"
+Homepage = "https://github.com/DLR-FT/eduplane"
+Repository = "https://github.com/DLR-FT/eduplane"
+Issues = "https://github.com/DLR-FT/eduplane/issues"
 
 [tool.setuptools.packages.find]
 include = ["eduplane*"]

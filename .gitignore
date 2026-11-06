@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 DLR e.V. (German Aerospace Center)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+*.pyc
+.idea/
+__pycache__/
+.vscode/
+.VSCodeCounter/
+docs/build
+docs/source/*.rst
+.ipynb_checkpoints
+.backup
+.coverage
+cov.xml
+temp/
+backup/
+profile.stats
+profile.pstats
+*.stats
+*.pstats
+log.txt
+temp*.txt
+*.bak
+.venv*
+dist/
+build/
+*.egg-info/
+*.png
+*.pdf
